@@ -29,12 +29,12 @@ defmodule FrostyFriend.Temperature.DataParser do
 
   defp convert_to_float(temp) do
     case Float.parse(temp) do
-      {float_temp, ""} -> {:ok, float_temp / 1000.0}
+      {float_temp, ""} -> {:ok, Float.round(float_temp / 1000.0, 3)}
       _ -> {:error, :invalid_temperature_data}
     end
   end
 
   defp convert_to_fahrenheit(float_temp_c) do
-    float_temp_c * 9.0 / 5.0 + 32.0
+    Float.round(float_temp_c * 9.0 / 5.0 + 32.0, 3)
   end
 end
