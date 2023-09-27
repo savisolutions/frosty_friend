@@ -29,7 +29,6 @@ defmodule FrostyFriendWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :frosty_friend
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
