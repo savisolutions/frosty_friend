@@ -94,6 +94,10 @@ defmodule FrostyFriend.Temperature.Probe do
     end
   end
 
+  defp device_path("LOCAL") do
+    {:ok, File.cwd!() <> "/test/support/fake_temp_data"}
+  end
+
   defp device_path(device_id) when is_binary(device_id) do
     {:ok, @base_file_path <> device_id <> @device_file_name}
   end
