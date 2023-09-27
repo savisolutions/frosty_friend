@@ -3,6 +3,7 @@ defmodule FrostyFriend.Temperature.Probe do
   require Logger
 
   alias FrostyFriend.Temperature.DataParser
+  alias FrostyFriend.Temperature.Store
 
   @base_file_path "/sys/bus/w1/devices/"
   @device_file_name "/w1_slave"
@@ -20,7 +21,7 @@ defmodule FrostyFriend.Temperature.Probe do
 
   @impl true
   def init(state) do
-    {:ok, state}
+    {:ok, {:continue, :schedule, state}}
   end
 
   @impl true
@@ -45,6 +46,7 @@ defmodule FrostyFriend.Temperature.Probe do
   @impl true
   def handle_info(:poll, %{device_path: device_path} = state) do
     spawn_port(device_path)
+    schedule()
 
     {:noreply, state}
   end
@@ -56,7 +58,15 @@ defmodule FrostyFriend.Temperature.Probe do
 
   def handle_info({port, {:data, msg}}, state) do
     Logger.debug("Received message from port")
-    IO.inspect(DataParser.parse(msg))
+
+    case DataParser.parse(msg) do
+      {:ok, temp_c, temp_f} ->
+        Store.put(temp_c, temp_f)
+
+      error ->
+        Logger.error(error)
+    end
+
     close_port(port)
     {:noreply, state}
   end

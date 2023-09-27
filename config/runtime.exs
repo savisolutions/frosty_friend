@@ -20,6 +20,8 @@ if System.get_env("PHX_SERVER") do
   config :frosty_friend, FrostyFriendWeb.Endpoint, server: true
 end
 
+config :frosty_friend, device_id: System.get_env("DEVICE_ID", "28-3de1d4434c79")
+
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you

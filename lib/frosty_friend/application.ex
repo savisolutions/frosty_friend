@@ -15,7 +15,9 @@ defmodule FrostyFriend.Application do
       # Start Finch
       {Finch, name: FrostyFriend.Finch},
       # Start the Endpoint (http/https)
-      FrostyFriendWeb.Endpoint
+      FrostyFriendWeb.Endpoint,
+      FrostyFriend.Temperature.Store,
+      {FrostyFriend.Temperature.Probe, [Application.get_env(:frosty_friend, :device_id)]},
       # Start a worker by calling: FrostyFriend.Worker.start_link(arg)
       # {FrostyFriend.Worker, arg}
     ]
