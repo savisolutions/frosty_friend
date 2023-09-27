@@ -21,7 +21,7 @@ defmodule FrostyFriend.Temperature.Probe do
 
   @impl true
   def init(state) do
-    {:ok, {:continue, :schedule, state}}
+    {:ok, state, {:continue, :schedule}}
   end
 
   @impl true
