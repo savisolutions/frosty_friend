@@ -7,9 +7,6 @@
 # General application configuration
 import Config
 
-config :frosty_friend,
-  ecto_repos: [FrostyFriend.Repo]
-
 # Configures the endpoint
 config :frosty_friend, FrostyFriendWeb.Endpoint,
   url: [host: "localhost"],
@@ -19,15 +16,6 @@ config :frosty_friend, FrostyFriendWeb.Endpoint,
   ],
   pubsub_server: FrostyFriend.PubSub,
   live_view: [signing_salt: "qneHXnKU"]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :frosty_friend, FrostyFriend.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
