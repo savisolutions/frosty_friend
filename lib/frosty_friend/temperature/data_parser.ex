@@ -1,6 +1,6 @@
 defmodule FrostyFriend.Temperature.DataParser do
-
-  @spec parse(String.t()) :: {:ok, float(), float()} | {:error, :invalid_temperature_data | :temperature_not_found}
+  @spec parse(String.t()) ::
+          {:ok, float(), float()} | {:error, :invalid_temperature_data | :temperature_not_found}
   def parse(data) do
     with {:ok, valid_line} <- get_valid_line(data),
          {:ok, string_temperature} <- parse_temperature_from_line(valid_line),
