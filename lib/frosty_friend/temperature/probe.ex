@@ -61,6 +61,10 @@ defmodule FrostyFriend.Temperature.Probe do
     {:noreply, state}
   end
 
+  def call_temp do
+    GenServer.call(__MODULE__, :poll)
+  end
+
   def call_temp(device_path_override) do
     GenServer.call(__MODULE__, {:poll, device_path_override})
   end
