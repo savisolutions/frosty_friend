@@ -26,7 +26,7 @@ defmodule FrostyFriend.Temperature.Store do
 
     :temperatures
     |> :ets.select(select_pattern)
-    |> Enum.map(fn {unix_date, temp} -> {DateTime.from_unix!(unix_date), temp} end)
+    |> Enum.map(fn {unix_date, temp} -> {NaiveDateTime.to_iso8601(DateTime.from_unix!(unix_date)), temp} end)
     |> Enum.sort_by(&elem(&1, 0), time_order)
   end
 
