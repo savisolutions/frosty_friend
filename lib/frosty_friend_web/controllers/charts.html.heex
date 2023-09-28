@@ -1,6 +1,45 @@
 <body>
-  <div class="flex flex-col gap-10 m-0 h-full">
-    <div class="flex grow w-auto">
+    <div class="md:container md:mx-auto gap-10 m-0 h-full">
+      <.simple_form :let={f} id="params-form" for={@form} as={:options} phx-change="apply_params">
+        <div class="grid grid-cols-3">
+          <.input field={f[:measurement]} 
+            type="select" 
+            options=
+            {
+              [ 
+                {"Celsius", "celsius"},
+                {"Fahrenheit", "fahrenheit"}
+              ]
+            }
+          />
+          <.input field={f[:time_span]} 
+            type="select" 
+            options=
+            {
+              [ 
+                {"30 seconds", 30},
+                {"1 minute", 60},
+                {"10 minutes", 600},
+                {"1 hour", 3600},
+                {"4 hours", 14400}
+              ]
+            }
+          />
+          <.input field={f[:chart_type]} 
+            type="select" 
+            options=
+            {
+              [ 
+                {"Line", "line"},
+                {"Bar", "bar"}
+              ]
+            }
+          />
+        </div>
+      </.simple_form>
+    </div>
+
+    <div>
       <canvas
         id="line_chart"
         phx-hook="ChartJS"
@@ -10,5 +49,4 @@
       >
       </canvas>
     </div>
-  </div>
 </body>

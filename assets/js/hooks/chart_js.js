@@ -14,7 +14,7 @@ const ChartJS = {
         labels: this.labels(),
         datasets: [
           {
-            label: "Temperature Monitoring",
+            label: "Temperature",
             data: this.dataset(),
           },
         ],
@@ -24,14 +24,16 @@ const ChartJS = {
           padding: {
             bottom: 1
           }
-      },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
         animations: {
           tension: {
             duration: 1000,
             easing: "linear",
             from: 1,
             to: 0,
-            loop: true,
+            loop: false,
           }
         },
       },
@@ -40,6 +42,11 @@ const ChartJS = {
     this.handleEvent("update-points", function (payload) {
       chart.data.datasets[0].data = payload.data;
       chart.data.labels = payload.labels;
+      chart.update();
+    });
+
+    this.handleEvent("update-type", function (payload) {
+      chart.type = payload.type;
       chart.update();
     });
   },
