@@ -17,7 +17,7 @@ defmodule FrostyFriend.Application do
       # Start the Endpoint (http/https)
       FrostyFriendWeb.Endpoint,
       FrostyFriend.Temperature.Store,
-      {FrostyFriend.Temperature.Probe, Application.get_env(:frosty_friend, :device_id)},
+      {FrostyFriend.Temperature.Probe, Application.get_env(:frosty_friend, :device_id)}
       # Start a worker by calling: FrostyFriend.Worker.start_link(arg)
       # {FrostyFriend.Worker, arg}
     ]

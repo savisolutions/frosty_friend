@@ -35,11 +35,12 @@ defmodule FrostyFriend.Temperature.Store do
   def list(%DateTime{} = date_time, measurement \\ :celsius, time_order \\ :asc) do
     date_comp = DateTime.to_unix(date_time)
 
-    select_pattern = if measurement == :celsius do
-      [{{:"$1", :"$2", :_}, [{:>=, :"$1", date_comp}], [{{:"$1", :"$2"}}]}]
-    else
-      [{{:"$1", :_, :"$2"}, [{:>=, :"$1", date_comp}], [{{:"$1", :"$2"}}]}]
-    end
+    select_pattern =
+      if measurement == :celsius do
+        [{{:"$1", :"$2", :_}, [{:>=, :"$1", date_comp}], [{{:"$1", :"$2"}}]}]
+      else
+        [{{:"$1", :_, :"$2"}, [{:>=, :"$1", date_comp}], [{{:"$1", :"$2"}}]}]
+      end
 
     :temperatures
     |> :ets.select(select_pattern)
