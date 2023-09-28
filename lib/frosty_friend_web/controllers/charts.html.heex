@@ -1,24 +1,14 @@
 <body>
-<div class="flex flex-col gap-10 m-0 h-full">
-  <div class="flex grow w-auto">
-    <canvas
-      id="line_chart"
-      phx-hook="ChartJS"
-      data-chart-data={Jason.encode!(@chart_data)}
-      data-element="line_chart"
-      data-type="line"
-    >
-    </canvas>
+  <div class="flex flex-col gap-10 m-0 h-full">
+    <div class="flex grow w-auto">
+      <canvas
+        id="line_chart"
+        phx-hook="ChartJS"
+        data-chart-data={Jason.encode!(@chart_data)}
+        data-element="line_chart"
+        data-type="line"
+      >
+      </canvas>
+    </div>
   </div>
-  <div class="flex grow w-auto">
-    <canvas
-      id="bar_chart"
-      phx-hook="ChartJS"
-      data-chart-data={Jason.encode!(@chart_data)}
-      data-element="bar_chart"
-      data-type="bar"
-    >
-    </canvas>
-  </div>
-</div>
 </body>
