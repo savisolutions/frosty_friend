@@ -24,8 +24,8 @@ defmodule FrostyFriendWeb.Charts do
   end
 
   def get_temperature_data do
-    utc_now = DateTime.utc_now() |> DateTime.add(-1, :minute)
-    Store.list(utc_now, :celsius, :desc)
+    utc_now = DateTime.utc_now() |> DateTime.add(-30, :second)
+    Store.list(utc_now)
   end
 
   defp convert_to_chart_data(temperature_data) do
