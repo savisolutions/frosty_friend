@@ -26,16 +26,7 @@ const ChartJS = {
           }
         },
         responsive: true,
-        maintainAspectRatio: false,
-        animations: {
-          tension: {
-            duration: 1000,
-            easing: "linear",
-            from: 1,
-            to: 0,
-            loop: false,
-          }
-        },
+        maintainAspectRatio: false
       },
     };
     var chart = new Chart(document.getElementById(this.el.dataset.element), config);
