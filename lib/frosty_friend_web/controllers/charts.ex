@@ -22,11 +22,12 @@ defmodule FrostyFriendWeb.Charts do
   def handle_info(:update_data, socket) do
     time_span = socket.assigns.form.params["time_span"]
     measurement = socket.assigns.form.params["measurement"]
+    chart_type = socket.assigns.form.params["chart_type"]
     temperature_data = get_temperature_data(time_span, measurement)
     chart_data = convert_to_chart_data(temperature_data)
     Process.send_after(self(), :update_data, 5000)
 
-    {:noreply, push_event(socket, "update-points", chart_data)}
+    {:noreply, push_event(socket, "update-points", Map.merge(chart_data, %{type: chart_type}))}
   end
 
   @impl true
@@ -40,8 +41,7 @@ defmodule FrostyFriendWeb.Charts do
 
     temperature_data = get_temperature_data(time_span, measurement)
     chart_data = convert_to_chart_data(temperature_data)
-    push_event(socket, "update-type", %{type: chart_type})
-    {:noreply, assign(socket, chart_data: chart_data, form: form)}
+    {:noreply, assign(socket, chart_data: chart_data, form: form) |> push_event("update-points", Map.merge(chart_data, %{type: chart_type}))}
   end
 
   def get_temperature_data(time_span, measurement) do

@@ -1,14 +1,28 @@
 <body>
-    <div class="md:container md:mx-auto gap-10 m-0 h-full">
+  <div class="grid grid-cols-1 place-items-center max-h-full max-w-full">
       <.simple_form :let={f} id="params-form" for={@form} as={:options} phx-change="apply_params">
-        <div class="grid grid-cols-3">
+          <%!-- <.radio field={f[:chart_type]} 
+            type="radio"
+            options={["line", "bar"]}
+          /> --%>
+          <div class="grid grid-cols-3">
+          <.input field={f[:chart_type]} 
+            type="select" 
+            options=
+            {
+              [ 
+                {"Line", "line"},
+                {"Bar", "bar"}
+              ]
+            }
+          />
           <.input field={f[:measurement]} 
             type="select" 
             options=
             {
               [ 
-                {"Celsius", "celsius"},
-                {"Fahrenheit", "fahrenheit"}
+                {"C°", "celsius"},
+                {"F°", "fahrenheit"}
               ]
             }
           />
@@ -25,28 +39,18 @@
               ]
             }
           />
-          <.input field={f[:chart_type]} 
-            type="select" 
-            options=
-            {
-              [ 
-                {"Line", "line"},
-                {"Bar", "bar"}
-              ]
-            }
-          />
-        </div>
+          </div>
       </.simple_form>
-    </div>
 
-    <div>
+    <div class="h-96 w-full max-w-5xl">
       <canvas
-        id="line_chart"
+        id="canvas"
         phx-hook="ChartJS"
         data-chart-data={Jason.encode!(@chart_data)}
-        data-element="line_chart"
-        data-type="line"
+        data-element="canvas"
+        data-type={@form.params["chart_type"]}
       >
       </canvas>
     </div>
+  </div>
 </body>
