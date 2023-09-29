@@ -26,7 +26,10 @@ const ChartJS = {
           }
         },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        animation: {
+          duration: 0
+        }
       },
     };
     var chart = new Chart(document.getElementById(this.el.dataset.element), config);
